@@ -2,7 +2,7 @@
 if(window.location.port !== undefined || window.location.port.length > 0) {
     api += ':' + window.location.port;
 }*/
-var api = 'http://54.71.107.179:27175';
+var api = 'http://explorer.coin.inbest.cloud:27175';
 var blockTargetInterval = 240;
 var coinUnits = 12;
 var symbol = 'INC';
