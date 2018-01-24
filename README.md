@@ -8,13 +8,57 @@ You can read more about it at https://coin.inbest.cloud
 
 This in an experimental block explorer for inbestcoin.
 
-## Installation
+## Installation on Ubuntu 16.04
+1) Configure your webserver:
 
-1) It takes data from daemon inbestcoind. It should be accessible from the Internet. Run inbestcoind with open port as follows:
+```bash
+sudo apt-get install apache2
+sudo a2enmod headers
+sudo rm /etc/apache2/sites-available/000-default.conf
+sudo rm /etc/apache2/sites-available/default-ssl.conf
+sudo vim /etc/apache2/sites-available/explorer.coin.inbest.cloud.conf
+
+  <VirtualHost *:80>
+      ServerAdmin webmaster@explorer.coin.inbest.cloud
+      ServerName explorer.coin.inbest.cloud
+      ServerAlias www.explorer.coin.inbest.cloud
+      DocumentRoot /var/www/explorer.coin.inbest.cloud/public_html/
+      ErrorLog /var/www/explorer.coin.inbest.cloud/logs/error.log
+      CustomLog /var/www/explorer.coin.inbest.cloud/logs/access.log combined
+      <Directory /var/www/explorer.coin.inbest.cloud/public_html/>
+        Options FollowSymLinks
+        AllowOverride All
+        Require all granted
+      </Directory>
+  </VirtualHost>
+
+sudo mkdir -p /var/www/explorer.coin.inbest.cloud/public_html
+sudo mkdir -p /var/www/explorer.coin.inbest.cloud/logs
+
+sudo touch /var/www/explorer.coin.inbest.cloud/logs/error.log
+sudo touch /var/www/explorer.coin.inbest.cloud/logs/access.log
+
+sudo usermod -a -G www-data ubuntu
+sudo chown -R www-data:www-data /var/www/
+sudo chown -R /var/www/explorer.coin.inbest.cloud/public_html
+
+sudo a2dissite 000-default.conf
+sudo a2ensite explorer.coin.inbest.cloud
+
+sudo rm -rf /var/www/html
+
+cd /var/www/
+sudo find . -type f -exec chmod 664 {} \;
+sudo find . -type d -exec chmod 775 {} \;
+
+sudo systemctl restart apache2
+```
+
+2) Run inbestcoind as follows:
 ```bash
 ./inbestcoind --restricted-rpc --enable-cors=* --enable-blockchain-indexes --rpc-bind-ip=0.0.0.0 --rpc-bind-port=27175
 ```
-2) Just upload to your website and change `api` variable in `config.js` to point to your daemon.
+3) Upload the to your website and change `api` variable in `config.js` to point to your daemon.
 
 ## Community and support
 
