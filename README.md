@@ -13,6 +13,7 @@ This in an experimental block explorer for inbestcoin.
 
 ```bash
 sudo apt-get install apache2
+sudo apt-get install php libapache2-mod-php php-mcrypt php-curl
 sudo a2enmod headers
 sudo rm /etc/apache2/sites-available/000-default.conf
 sudo rm /etc/apache2/sites-available/default-ssl.conf
