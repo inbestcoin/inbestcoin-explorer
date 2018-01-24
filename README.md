@@ -12,7 +12,7 @@ This in an experimental block explorer for inbestcoin.
 
 1) It takes data from daemon inbestcoind. It should be accessible from the Internet. Run inbestcoind with open port as follows:
 ```bash
-./inbestcoind --enable_blockexplorer --rpc-bind-ip=127.0.0.1 --rpc-bind-port=27175
+./inbestcoind --restricted-rpc --enable-cors=* --enable-blockchain-indexes --rpc-bind-ip=0.0.0.0 --rpc-bind-port=27175
 ```
 2) Just upload to your website and change `api` variable in `config.js` to point to your daemon.
 
