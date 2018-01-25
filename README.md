@@ -57,7 +57,7 @@ sudo systemctl restart apache2
 
 2) Run inbestcoind as follows:
 ```bash
-./inbestcoind --restricted-rpc --enable-cors=* --enable-blockchain-indexes --rpc-bind-ip=0.0.0.0 --rpc-bind-port=27175
+./inbestcoind --enable-cors=* --enable_blockexplorer --rpc-bind-ip=0.0.0.0 --rpc-bind-port=27175
 ```
 3) Upload the to your website and change `api` variable in `config.js` to point to your daemon.
 
