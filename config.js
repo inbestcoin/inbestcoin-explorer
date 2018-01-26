@@ -4,7 +4,7 @@ if(window.location.port !== undefined || window.location.port.length > 0) {
 }*/
 var api = 'http://explorer.coin.inbest.cloud:27175';
 var blockTargetInterval = 240;
-var coinUnits = 12;
+var coinUnits = 1000000000000;
 var symbol = 'INC';
 var refreshDelay = 30000;
 // pools stats by MainCoins
