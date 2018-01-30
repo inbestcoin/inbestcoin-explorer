@@ -218,7 +218,8 @@ $.ajax({
 			success: function(data){
 			block = data.result.block;
 				updateText('totalCoins', getReadableCoins(block.alreadyGeneratedCoins,2));
-				updateText('emissionPercent', (block.alreadyGeneratedCoins / 10000000000000000000 * 100).toFixed(4));
+				updateText('depositPercent', (lastStats.full_deposit_amount / block.alreadyGeneratedCoins * 100).toFixed(4));
+				//updateText('emissionPercent', (block.alreadyGeneratedCoins / 10000000000000000000 * 100).toFixed(4));
 				updateText('currentReward', getReadableCoins(block.baseReward,4));
 			}
 		});
@@ -384,22 +385,20 @@ $('#goto-height').keyup(function(e){
         row.setAttribute('data-height', block.height);
         row.setAttribute('id', 'blockRow' + block.height);
         row.setAttribute('title', block.hash);
-		var dateTime = new Date(block.timestamp * 1000).toISOString();
-		row.setAttribute('data-dt', dateTime);
+				var dateTime = new Date(block.timestamp * 1000).toISOString();
+				row.setAttribute('data-dt', dateTime);
         var columns =
             '<td>' + block.height + '</td>' +
             '<td class="date-time">' + formatDate(block.timestamp) + ' (<time class="timeago" datetime="'+dateTime+'"></time>)</td>' +
-			'<td>' + block.cumul_size + '</td>' +
-			'<td>' + formatBlockLink(block.hash) + '</td>' +
+						'<td>' + block.cumul_size + '</td>' +
+						'<td>' + formatBlockLink(block.hash) + '</td>' +
             '<td class="blk-diff">' + block.difficulty + '</td>' +
             '<td>' + block.tx_count + '</td>';
-
-		Difficulties.push(parseInt(block.difficulty));
-		Blocks.push(parseInt(block.height));
-		Txses.push(parseInt(block.tx_count));
-		Sizes.push(parseInt(block.cumul_size));
-		Timestamps.push(dateTime);
-
+				Difficulties.push(parseInt(block.difficulty));
+				Blocks.push(parseInt(block.height));
+				Txses.push(parseInt(block.tx_count));
+				Sizes.push(parseInt(block.cumul_size));
+				Timestamps.push(dateTime);
         row.innerHTML = columns;
 
         return row;
