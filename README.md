@@ -15,8 +15,6 @@ This in an experimental block explorer for inbestcoin.
 sudo apt-get install apache2
 sudo apt-get install php libapache2-mod-php php-mcrypt php-curl
 sudo a2enmod headers
-sudo rm /etc/apache2/sites-available/000-default.conf
-sudo rm /etc/apache2/sites-available/default-ssl.conf
 sudo vim /etc/apache2/sites-available/explorer.coin.inbest.cloud.conf
 
   <VirtualHost *:80>
@@ -35,24 +33,10 @@ sudo vim /etc/apache2/sites-available/explorer.coin.inbest.cloud.conf
 
 sudo mkdir -p /var/www/explorer.coin.inbest.cloud/public_html
 sudo mkdir -p /var/www/explorer.coin.inbest.cloud/logs
-
 sudo touch /var/www/explorer.coin.inbest.cloud/logs/error.log
 sudo touch /var/www/explorer.coin.inbest.cloud/logs/access.log
-
-sudo usermod -a -G www-data ubuntu
-sudo chown -R www-data:www-data /var/www/
-sudo chown -R /var/www/explorer.coin.inbest.cloud/public_html
-
-sudo a2dissite 000-default.conf
 sudo a2ensite explorer.coin.inbest.cloud
-
-sudo rm -rf /var/www/html
-
-cd /var/www/
-sudo find . -type f -exec chmod 664 {} \;
-sudo find . -type d -exec chmod 775 {} \;
-
-sudo systemctl restart apache2
+sudo service apache2 reload
 ```
 
 2) Run inbestcoind as follows:
